@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pregunta seria</title>
+    <style>
+        body {
+            background: radial-gradient(circle, #111, #000);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        h1 {
+            margin-top: 120px;
+            font-size: 42px;
+        }
+
+        button {
+            font-size: 22px;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        #si {
+            background: #00ff99;
+            color: black;
+        }
+
+        #no {
+            position: absolute;
+            background: #ff4444;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>¿Quieres jugar conmigo? 🎮</h1>
+
+    <button id="si" onclick="aceptar()">Sí 😄</button>
+    <button id="no" onmouseenter="moverNo()">No 😐</button>
+
+    <script>
+        let escala = 1;
+        let intentos = 0;
+
+        function aceptar() {
+            document.body.innerHTML = `
+            <h1 style="margin-top:200px;font-size:55px;">
+              YAAAY 🎉<br>
+              Sabía que caerías
+            </h1>
+          `;
+        }
+
+        function moverNo() {
+            intentos++;
+            const no = document.getElementById("no");
+
+            const x = Math.random() * (window.innerWidth - 120);
+            const y = Math.random() * (window.innerHeight - 120);
+
+            escala -= 0.12;
+            if (escala < 0.25) escala = 0.25;
+
+            const textos = [
+                "No 😐",
+                "No 😶",
+                "No 😬",
+                "Imposible",
+                "JAJA no",
+                "Deja eso",
+                "En serio?",
+                "Ríndete",
+                "XD"
+            ];
+
+            no.innerText = textos[Math.floor(Math.random() * textos.length)];
+            no.style.left = x + "px";
+            no.style.top = y + "px";
+            no.style.transform = `scale(${escala})`;
+        }
+
+        // Mensaje troll al intentar cerrar
+        window.onbeforeunload = function () {
+            return "¿A dónde vas? >:V Primero responde";
+        };
+    </script>
+
+</body>
+</html>
